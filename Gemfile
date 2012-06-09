@@ -10,6 +10,8 @@ gem 'simple_form'
 gem 'faye'
 gem 'thin'
 gem 'hashie'
+gem 'redis'
+gem 'resque'
 
 # Gems used only for assets and not required
 # in production environments by default.
