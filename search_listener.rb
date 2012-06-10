@@ -6,11 +6,11 @@ load 'app/jobs/index_job.rb'
 
 EM.run do
   redis = Redis.new(:host => 'localhost', :port => 6379)
+  Resque.redis = 'localhost:6379:1'
 
   redis.subscribe('thinchat') do |on|
     on.message do |channel, msg|
       data = JSON.parse(msg)
-      puts data.inspect
       Resque.enqueue(IndexJob, msg)
     end
   end
