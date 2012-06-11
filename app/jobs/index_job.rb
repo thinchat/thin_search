@@ -6,7 +6,8 @@ class IndexJob
     data = JSON.parse(msg)
     puts "STUFF COMING AT YOU"
     puts data['data']['chat_message'].inspect
-    Message.create(chat_message: data['data']['chat_message'], chat_body: data['data']['chat_message']['message_body'])
+    Message.create(chat_message: data['data']['chat_message'], chat_body: data['data']['chat_message']['message_body'],
+                    chat_author: data['data']['chat_message']['user_name'], chat_user_id:  data['data']['chat_message']['user_id'])
   end
 end
 
