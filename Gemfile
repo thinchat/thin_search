@@ -11,8 +11,10 @@ gem 'faye'
 gem 'thinking-sphinx'
 gem 'thin'
 gem 'hashie'
+gem 'resque', '~>1.20.0'
+gem 'resque-scheduler'
 gem 'redis'
-gem 'resque'
+
 
 # Gems used only for assets and not required
 # in production environments by default.

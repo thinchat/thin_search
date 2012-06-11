@@ -1,0 +1,5 @@
+reindex_sphinx: 
+  every: "30s"
+  class: IndexSphinxJob 
+  queue: index
+  description: "This will run 5m to index recent chat messages"
