@@ -3,11 +3,11 @@ require 'redis'
 require 'json'
 require 'resque'
 load 'app/jobs/index_job.rb'
+load 'app/config/initializers/redis.rb'
 
 EM.run do
-  redis = Redis.new(:host => 'localhost', :port => 6379)
-
-  redis.subscribe('thinchat') do |on|
+  #REDIS being initialized by rails in initializers
+  REDIS.subscribe('thinchat') do |on|
     on.message do |channel, msg|
       data = JSON.parse(msg)
       puts data.inspect
