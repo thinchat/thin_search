@@ -15,7 +15,5 @@ namespace :resque do
     ENV['RAILS_ENV'] = Rails.env
     
     Resque.schedule = YAML.load_file('config/resque_schedule.yml')
-
-
   end
 end

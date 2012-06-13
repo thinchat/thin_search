@@ -18,3 +18,4 @@ pickle-email-*.html
 /config/initializers/secret.rb
 .vagrant
 Vagrantfile
+/config/secret
