@@ -8,6 +8,7 @@ class Api::V1::SearchesController < ApplicationController
       results = {}
     end
 
+    messages = results.collect{ |i| i['chat_message']}
     render :json => results
   end
 end
