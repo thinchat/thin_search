@@ -1,5 +1,6 @@
 require "bundler/capistrano"
 require 'capistrano/ext/multistage'
+require 'thinking_sphinx/deploy/capistrano'
 
 set :stages, %w(production development staging) 
 set :default_stage, "development"
@@ -24,6 +25,7 @@ namespace :deploy do
     desc "#{command} unicorn server"
     task command, roles: :app, except: {no_release: true} do
       run "/etc/init.d/unicorn_#{application} #{command}"
+      run 
     end
   end
 
@@ -58,4 +60,16 @@ namespace :deploy do
     end
   end
   before "deploy", "deploy:check_revision"
+
+  before 'deploy:update_code', 'thinking_sphinx:stop'
+  after 'deploy:update_code', 'thinking_sphinx:start'
+
+  namespace :sphinx do
+    desc "Symlink Sphinx indexes"
+    task :symlink_indexes, :roles => [:app] do
+      run "ln -nfs #{shared_path}/db/sphinx #{release_path}/db/sphinx"
+    end
+  end
+
+after 'deploy:finalize_update', 'sphinx:symlink_indexes'
 end
