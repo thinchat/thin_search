@@ -8,6 +8,7 @@ set :application, "thin_search"
 set :user, "deployer"
 set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
+set :use_sudo, false
 
 set :scm, "git"
 set :repository, "git@github.com:thinchat/#{application}.git"
@@ -25,7 +26,6 @@ namespace :deploy do
       run "/etc/init.d/unicorn_#{application} #{command}"
     end
   end
-
 
   task :setup_config, roles: :app do
     sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
