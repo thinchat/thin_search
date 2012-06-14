@@ -62,14 +62,6 @@ namespace :deploy do
   before "deploy", "deploy:check_revision"
 
   before 'deploy:update_code', 'thinking_sphinx:stop'
-  after 'deploy:update_code', 'thinking_sphinx:start'
+  after 'deploy:update_code', 'thinking_sphinx:start', 'thinking_sphinx:index'
 
-  namespace :thinking_sphinx do
-    desc "Symlink Sphinx indexes"
-    task :symlink_indexes, :roles => [:app] do
-      run "ln -nfs #{shared_path}/db/sphinx #{release_path}/db/sphinx"
-    end
-  end
-
-after 'deploy:finalize_update', 'thinking_sphinx:symlink_indexes'
 end
