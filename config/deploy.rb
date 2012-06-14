@@ -26,18 +26,15 @@ namespace :deploy do
     end
   end
 
+
   task :setup_config, roles: :app do
     sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
     run "mkdir -p #{shared_path}/config"
     transfer(:up, "config/secret/database.yml", "#{shared_path}/config/database.yml", :scp => true)
+    transfer(:up, "config/secret/redis_password.rb", "#{shared_path}/config/secret/redis_password.rb", :scp => true)
     puts "Now edit the config files in #{shared_path}."
   end
   after "deploy:setup", "deploy:setup_config"
-
-  task :nginx_config, roles: :app do
-    sudo "cp #{current_path}/config/nginx.conf /home/#{user}/apps/thinchat/config/"
-    sudo "ln -nfs /home/#{user}/apps/thinchat/config/nginx.conf /etc/nginx/sites-enabled/default"
-  end
 
   task :symlink_config, roles: :app do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
