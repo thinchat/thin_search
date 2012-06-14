@@ -30,6 +30,7 @@ namespace :deploy do
   task :setup_config, roles: :app do
     sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
     run "mkdir -p #{shared_path}/config"
+    run "mkdir -p #{shared_path}/config/secret"
     transfer(:up, "config/secret/database.yml", "#{shared_path}/config/database.yml", :scp => true)
     transfer(:up, "config/secret/redis_password.rb", "#{shared_path}/config/secret/redis_password.rb", :scp => true)
     puts "Now edit the config files in #{shared_path}."
