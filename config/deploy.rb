@@ -24,8 +24,7 @@ namespace :deploy do
   %w[start stop restart].each do |command|
     desc "#{command} unicorn server"
     task command, roles: :app, except: {no_release: true} do
-      run "/etc/init.d/unicorn_#{application} #{command}"
-      run 
+      run "/etc/init.d/unicorn_#{application} #{command}" 
     end
   end
 
@@ -63,5 +62,4 @@ namespace :deploy do
 
   before 'deploy:update_code', 'thinking_sphinx:stop'
   after 'deploy:update_code', 'thinking_sphinx:start', 'thinking_sphinx:index'
-
 end
