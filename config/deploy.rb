@@ -42,6 +42,7 @@ namespace :deploy do
 
   task :symlink_config, roles: :app do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    run "mkdir -p #{release_path}/config/secret"
     run "ln -nfs #{shared_path}/config/secret/redis_password.rb #{release_path}/config/secret/redis_password.rb"
     sudo "ln -nfs #{current_path}/config/unicorn/unicorn_#{stage}_init.sh /etc/init.d/unicorn_#{application}"
   end
