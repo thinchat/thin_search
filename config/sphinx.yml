@@ -1,0 +1,3 @@
+staging:
+  pid_file: /home/deployer/apps/thin_search/current/tmp/pids/searchd.pid
+  searchd_file_path: /home/deployer/apps/thin_search/current/db/sphinx
