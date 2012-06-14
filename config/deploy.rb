@@ -27,7 +27,7 @@ namespace :deploy do
     end
   end
 
-  task :secret, roles :app do
+  task :secret, roles: :app do
     transfer(:up, "config/secret/database.yml", "#{shared_path}/config/database.yml", :scp => true)
     transfer(:up, "config/secret/redis_password.rb", "#{shared_path}/config/secret/redis_password.rb", :scp => true)
   end
