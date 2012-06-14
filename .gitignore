@@ -19,3 +19,5 @@ pickle-email-*.html
 .vagrant
 Vagrantfile
 /config/secret
+config/development.sphinx.conf
+db/sphinx/*
