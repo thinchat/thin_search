@@ -45,7 +45,7 @@ namespace :deploy do
     run "mkdir -p #{release_path}/config/secret"
     run "ln -nfs #{shared_path}/config/secret/redis_password.rb #{release_path}/config/secret/redis_password.rb"
     sudo "ln -nfs #{current_path}/config/unicorn/unicorn_#{stage}_init.sh /etc/init.d/unicorn_#{application}"
-    run "chmod +x /etc/init.d/unicorn_#{application}"
+    run "chmod +x #{current_path}/config/unicorn/unicorn_#{stage}_init.sh"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
 
