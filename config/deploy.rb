@@ -42,8 +42,8 @@ namespace :deploy do
 
   task :symlink_config, roles: :app do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-    run "chmod +x #{current_path}/config/unicorn/unicorn_#{stage}_init.sh"
-    sudo "ln -nfs #{current_path}/config/unicorn/unicorn_#{stage}_init.sh /etc/init.d/unicorn_#{application}"
+    run "chmod +x #{release_path}/config/unicorn/unicorn_#{stage}_init.sh"
+    sudo "ln -nfs #{release_path}/config/unicorn/unicorn_#{stage}_init.sh /etc/init.d/unicorn_#{application}"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
 
