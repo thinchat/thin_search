@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-ThinSearch::Application.config.secret_token = 'c6e567e22dee3eb6475bc2ff09998dbc9155c69d729271ed3ab481a5ae963341066dc4b5ffa87002fd018af54481356fbd0b5cc95a2431dc20618883d2ec1406'
+ThinSearch::Application.config.secret_token = '84d260c5137819261a4d682e0e7b7c6150816fbea638352292b5fd8e695f98bb63fc1f4b99df1ff728f4460ebc96b5d507b40e90e5fd75c260758c39dd9e0ed0'
