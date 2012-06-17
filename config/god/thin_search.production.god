@@ -14,7 +14,6 @@ end
 
 God.watch do |w|
   w.name = "resque worker"
-  w.env      = {"QUEUE"=>"*"}
-  w.start    = "bundle exec rake environment resque:work"
+  w.start    = "cd /home/deployer/apps/thin_search/current; "VERBOSE=1 QUEUE=* bundle exec rake environment resque:work"
   w.log = '/var/log/god/search_worker.log'
 end
