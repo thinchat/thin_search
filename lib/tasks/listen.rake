@@ -1,5 +1,6 @@
 require 'eventmachine'
 
+desc "Listen for redis messages"
 task :listen => :environment do
   EM.run do
     REDIS.subscribe('thinchat') do |on|
