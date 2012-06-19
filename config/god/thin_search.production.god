@@ -20,6 +20,6 @@ God.watch do |w|
   w.name     = "resque-worker"
   w.group    = 'resque'
   w.interval = 30.seconds
-  w.env      = {"QUEUE"=>"critical,high,low", "RAILS_ENV"=>rails_env}
+  w.env      = {"QUEUE"=>"index", "RAILS_ENV"=>rails_env}
   w.start    = "/usr/bin/rake -f #{rails_root}/Rakefile environment resque:work"
 end
