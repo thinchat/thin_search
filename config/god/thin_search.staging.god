@@ -80,13 +80,15 @@ God.watch do |w|
 end
 
 God.watch do |w|
-  application = "search_listener"
-  w.name     = application
-  w.start = "cd /home/deployer/apps/thin_search/current; bundle exec rake listen"
-  w.log = '/var/log/god/search_listener.log'
+  w.name = "search_listener"
+  w.start = "bundle exec rake listen"
+  w.dir = rails_root
+  w.pid_file = "#{rails_root}/tmp/pids/#{w.name}.pid"
+  w.env = {'PIDFILE' => w.pid_file}
   w.keepalive
-  w.log = "/var/log/god/#{application}.log"
-  w.err_log = "/var/log/god/#{application}_error.log"
+  w.interval = 10.seconds
+  w.log = "/var/log/god/#{w.name}.log"
+  w.err_log = "/var/log/god/#{w.name}_error.log"
 
   # determine when process has finished starting
   w.transition([:start, :restart], :up) do |on|
@@ -107,13 +109,15 @@ God.watch do |w|
 end
 
 God.watch do |w|
-  application = "search_scheduler"
-  w.name     = application
-  w.start = "cd /home/deployer/apps/thin_search/current; bundle exec rake resque:scheduler"
-  w.log = '/var/log/god/search_scheduler.log'
+  w.name = "search_scheduler"
+  w.start = "bundle exec rake resque:scheduler"
+  w.dir = rails_root
+  w.pid_file = "#{rails_root}/tmp/pids/#{w.name}.pid"
+  w.env = {'PIDFILE' => w.pid_file}
   w.keepalive
-  w.log = "/var/log/god/#{application}.log"
-  w.err_log = "/var/log/god/#{application}_error.log"
+  w.interval = 10.seconds
+  w.log = "/var/log/god/#{w.name}.log"
+  w.err_log = "/var/log/god/#{w.name}_error.log"
 
   # determine when process has finished starting
   w.transition([:start, :restart], :up) do |on|
@@ -136,13 +140,15 @@ end
 God.watch do |w|
   application = "search_worker"
   w.name     = application
-  w.dir      = "#{rails_root}"
+  w.dir = rails_root
   w.group    = 'resque'
+  w.keepalive
   w.interval = 30.seconds
-  w.env      = {"QUEUE"=>"index", "RAILS_ENV"=>rails_env}
+  w.pid_file = "#{rails_root}/tmp/pids/#{w.name}.pid"
+  w.env      = {"QUEUE"=>"index", "RAILS_ENV"=>rails_env, "PIDFILE" => w.pid_file}
   w.start    = "/usr/bin/rake -f #{rails_root}/Rakefile environment resque:work"
-  w.log = "/var/log/god/#{application}.log"
-  w.err_log = "/var/log/god/#{application}_error.log"
+  w.log = "/var/log/god/#{w.name}.log"
+  w.err_log = "/var/log/god/#{w.name}_error.log"
 
   # determine when process has finished starting
   w.transition([:start, :restart], :up) do |on|
