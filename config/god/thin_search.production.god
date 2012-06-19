@@ -111,7 +111,6 @@ end
 God.watch do |w|
   w.name = "search_scheduler"
   w.start = "bundle exec rake resque:scheduler"
-  w.dir = rails_root
   w.pid_file = "#{rails_root}/tmp/pids/#{w.name}.pid"
   w.env = {'PIDFILE' => w.pid_file}
   w.keepalive
@@ -146,7 +145,7 @@ God.watch do |w|
   w.interval = 30.seconds
   w.pid_file = "#{rails_root}/tmp/pids/#{w.name}.pid"
   w.env      = {"QUEUE"=>"index", "RAILS_ENV"=>rails_env, "PIDFILE" => w.pid_file}
-  w.start    = "/usr/bin/rake -f #{rails_root}/Rakefile environment resque:work"
+  w.start    = "/usr/local/bin/rake -f #{rails_root}/Rakefile environment resque:work"
   w.log = "/var/log/god/#{w.name}.log"
   w.err_log = "/var/log/god/#{w.name}_error.log"
 
