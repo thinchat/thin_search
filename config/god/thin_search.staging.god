@@ -1,5 +1,5 @@
 application = 'thin_search'
-rails_env = 'production'
+rails_env = 'staging'
 
 require "/home/deployer/apps/#{application}/current/config/secret/campfire_token.rb"
 rails_root = "/home/deployer/apps/#{application}/current"
