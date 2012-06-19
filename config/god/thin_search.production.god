@@ -111,6 +111,7 @@ end
 God.watch do |w|
   w.name = "search_scheduler"
   w.start = "bundle exec rake resque:scheduler"
+  w.dir = rails_root
   w.pid_file = "#{rails_root}/tmp/pids/#{w.name}.pid"
   w.env = {'PIDFILE' => w.pid_file}
   w.keepalive
