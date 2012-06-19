@@ -1,3 +1,19 @@
 staging:
   pid_file: /home/deployer/apps/thin_search/current/tmp/pids/searchd.pid
   searchd_file_path: /home/deployer/apps/thin_search/current/db/sphinx
+  enable_star: 1
+  min_infix_len: 1
+
+production:
+  pid_file: /home/deployer/apps/thin_search/current/tmp/pids/searchd.pid
+  searchd_file_path: /home/deployer/apps/thin_search/current/db/sphinx
+  enable_star: 1
+  min_infix_len: 1
+
+development:
+  enable_star: 1
+  min_infix_len: 1
+
+testing:
+  enable_star: 1
+  min_infix_len: 1
